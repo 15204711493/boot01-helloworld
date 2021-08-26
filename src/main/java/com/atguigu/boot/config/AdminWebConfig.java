@@ -14,4 +14,6 @@ public class AdminWebConfig implements WebMvcConfigurer {
                 .addPathPatterns("/**")
                 .excludePathPatterns("/","/login","/css/**","/fonts/**","/images/**","/js/**");
     }
+
+
 }
