@@ -31,7 +31,7 @@ public class FormController {
                          @RequestParam("photos") MultipartFile[] photos, HttpServletRequest request) throws IOException {
 
         if (!StringUtils.isEmpty(headerImg)) {
-            String path = ResourceUtils.getURL("classpath:/static/file/").getPath();
+            String path = System.getProperty("user.dir")+"/src/main/resources/static/file/";
             String filename = headerImg.getOriginalFilename();
             headerImg.transferTo(new File(path+ filename));
         }
@@ -39,7 +39,7 @@ public class FormController {
         if (photos.length > 0) {
             for (MultipartFile photo : photos) {
                 if (!photo.isEmpty()) {
-                    String path = ResourceUtils.getURL("classpath:/static/file/").getPath();
+                    String path = System.getProperty("user.dir")+"/src/main/resources/static/file/";
                     String filename = photo.getOriginalFilename();
                     photo.transferTo(new File(path + filename));
                 }
@@ -49,11 +49,4 @@ public class FormController {
         return "main";
     }
 
-    @GetMapping("/s")
-    @ResponseBody
-    public String path() throws FileNotFoundException {
-        String path = ClassUtils.getDefaultClassLoader().getResource("").getPath();
-
-        return  path;
-    }
 }
