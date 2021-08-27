@@ -3,6 +3,35 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/db2019
     username: root
-    password: 123456
-    filters: stat,wall
+    password: root
 
+
+    druid:
+      #监控包下的所有请求
+      aop-patterns: com.atguigu.boot.*
+      #防火墙 sql
+      filters: wall,stat
+      filter:
+        stat:
+          enabled: true
+          slow-sql-millis: 1000
+          log-slow-sql: true
+        wall:
+          enabled: true
+
+      #开启监控页面
+      stat-view-servlet:
+        enabled: true
+        login-username: root
+        login-password: root
+        reset-enable: false
+#监控请求
+      web-stat-filter:
+        enabled: true
+        url-pattern: /*
+        exclusions: '*.js,*.gif,*.jpg,*.png.*.css,*.ico,/druid/*'
+
+mybatis:
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true

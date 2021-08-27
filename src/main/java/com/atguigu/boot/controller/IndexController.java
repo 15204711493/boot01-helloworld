@@ -1,5 +1,6 @@
 package com.atguigu.boot.controller;
 
+import com.atguigu.boot.bean.U;
 import com.atguigu.boot.bean.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +21,7 @@ public class IndexController {
 
 
     @PostMapping("/login")
-    public String main(User user, HttpSession session, Model model){
+    public String main(U user, HttpSession session, Model model){
         if(!StringUtils.isEmpty(user.getUserName())&& StringUtils.hasLength(user.getPassWord())){
             session.setAttribute("user",user);
             return "redirect:/main";

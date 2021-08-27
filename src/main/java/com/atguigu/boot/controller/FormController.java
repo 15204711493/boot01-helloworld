@@ -41,7 +41,7 @@ public class FormController {
                 if (!photo.isEmpty()) {
                     String path = System.getProperty("user.dir")+"/src/main/resources/static/file/";
                     String filename = photo.getOriginalFilename();
-                    photo.transferTo(new File(path + filename));
+                    photo.transferTo(new File(path  + filename));
                 }
             }
         }

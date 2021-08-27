@@ -13,11 +13,11 @@ import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.Arrays;
 
-@Configuration
+//@Configuration
 public class DataSourceConfig {
 
-    @Bean
-    @ConfigurationProperties("spring.datasource")
+//    @Bean
+//    @ConfigurationProperties("spring.datasource")
     public DataSource dataSource() throws SQLException {
         DruidDataSource druidDataSource = new DruidDataSource();
         //druidDataSource.setFilters("stat,wall");
@@ -25,7 +25,7 @@ public class DataSourceConfig {
     }
 
     /*监控网站*/
-    @Bean
+    //@Bean
     public ServletRegistrationBean servletRegistrationBean() {
         StatViewServlet statViewServlet = new StatViewServlet();
         ServletRegistrationBean<StatViewServlet> registrationBean =
@@ -38,7 +38,7 @@ public class DataSourceConfig {
     /*web-jdbc*/
     /*请求的次数*/
 
-    @Bean
+   // @Bean
     public FilterRegistrationBean filterRegistrationBean() {
         WebStatFilter webStatFilter = new WebStatFilter();
         FilterRegistrationBean<WebStatFilter> webStatFilterFilterRegistrationBean =
@@ -50,6 +50,6 @@ public class DataSourceConfig {
 
     }
 
-    /*防火墙*/
+
 
 }

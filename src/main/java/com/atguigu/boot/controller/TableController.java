@@ -1,28 +1,44 @@
 package com.atguigu.boot.controller;
 
 import com.atguigu.boot.bean.User;
+import com.atguigu.boot.dao.UserMapper;
+import com.atguigu.boot.service.UserService;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 @Controller
 public class TableController {
+    @Autowired
+    UserService userService;
 
     @GetMapping("/basic_table")
     public String basic_table(){
-        int i = 10/0;
         return "table/basic_table";
     }
 
     @GetMapping("/dynamic_table")
-    public String dynamic_table(Model model){
-        List<User> users = Arrays.asList(new User("a", "1"), new User("b", "2"),
-                new User("c", "3"), new User("d", "4"));
-        model.addAttribute("users",users);
+    public String dynamic_table(@RequestParam(value = "pn",defaultValue = "1")Integer pn ,Model model){
+        Page<User> userPage = new Page<>(pn,2);
+        Page<User> page = userService.page(userPage);
+        long pages = page.getPages();
+        ArrayList<Long> ps = new ArrayList<>();
+        for (long i = 1; i <=pages; i++) {
+             ps.add(i);
+        }
+
+        System.out.println(ps);
+        model.addAttribute("ps",ps);
+        model.addAttribute("page",page);
+
         return "table/dynamic_table";
     }
 
